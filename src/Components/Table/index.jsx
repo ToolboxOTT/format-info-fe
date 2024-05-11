@@ -1,39 +1,59 @@
+import PropTypes from "prop-types";
+import React from "react";
 import Table from "react-bootstrap/Table";
+import { Wrapper } from "./styles";
 
-function TableComponent() {
+function TableComponent({ columns = [], data = [], onClickRow }) {
   return (
-    <>
+    <Wrapper>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            {columns.map((column, index) => (
+              <th key={index}>{column.label}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {data.map((row, index) => (
+            <tr key={index}>
+              {columns.map((column, index) => (
+                <React.Fragment key={index}>
+                  <td>
+                    <div
+                      onClick={() => {
+                        if (column.onClick) {
+                          onClickRow(row);
+                        }
+                      }}
+                    >
+                      {row[column.accesor]}
+                    </div>
+                  </td>
+                </React.Fragment>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </Table>
-    </>
+    </Wrapper>
   );
 }
+
+TableComponent.propTypes = {
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      file: PropTypes.string.isRequired,
+      lines: PropTypes.array,
+    })
+  ),
+  onClickRow: PropTypes.func,
+};
 
 export default TableComponent;
