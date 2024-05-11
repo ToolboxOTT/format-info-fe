@@ -16,19 +16,18 @@ function TableComponent({ columns = [], data = [], onClickRow }) {
         </thead>
         <tbody>
           {data.map((row, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              onClick={() => {
+                if (onClickRow) {
+                  onClickRow(row);
+                }
+              }}
+            >
               {columns.map((column, index) => (
                 <React.Fragment key={index}>
                   <td>
-                    <div
-                      onClick={() => {
-                        if (column.onClick) {
-                          onClickRow(row);
-                        }
-                      }}
-                    >
-                      {row[column.accesor]}
-                    </div>
+                    <div>{row[column.accesor]}</div>
                   </td>
                 </React.Fragment>
               ))}

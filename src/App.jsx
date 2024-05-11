@@ -17,10 +17,29 @@ const LIST_FILES_TABLE = [
   },
 ];
 
+const DETAIL_TABLE = [
+  {
+    label: "File Name",
+    accesor: "file",
+  },
+  {
+    label: "Text",
+    accesor: "text",
+  },
+  {
+    label: "Number",
+    accesor: "number",
+  },
+  {
+    label: "Hex",
+    accesor: "hex",
+  },
+];
+
 function App() {
   const [fileListData, setFileListData] = useState();
   const [fileListDetail, setFileListDetail] = useState();
-  const { data: fileList, loading, error } = useFetchData(
+  const { data: fileList } = useFetchData(
     "http://localhost:3000/api/v1/files/data"
   );
 
@@ -38,19 +57,32 @@ function App() {
   const onClickRow = (row) => {
     const { file } = row;
     if (file) {
-      const listFound = fileList.find( item => item.file === file);
-      console.warn('listFound', listFound)
+      const fileDetail = fileList.find((item) => item.file === file);
+      if (fileDetail) {
+        setFileListDetail(
+          fileDetail.lines.map((item) => ({
+            file: fileDetail.file,
+            ...item,
+          }))
+        );
+      }
     }
   };
 
   return (
     <>
-      <Header />
+      <Header>React Test App</Header>
       <TableComponent
         columns={LIST_FILES_TABLE}
         data={fileListData}
         onClickRow={onClickRow}
       />
+      {fileListDetail && (
+        <>
+          <Header>Detail</Header>
+          <TableComponent columns={DETAIL_TABLE} data={fileListDetail} />
+        </>
+      )}
     </>
   );
 }
