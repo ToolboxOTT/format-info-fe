@@ -13,5 +13,5 @@ test("Renders the Table Component", async () => {
 
   await screen.findByRole("column");
 
-  expect(screen.getByRole('column')).toHaveTextContent('hello there')
+  expect(screen.getByRole('column')).toHaveTextContent('File Name')
 });
