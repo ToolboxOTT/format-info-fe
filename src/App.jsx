@@ -2,39 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./Components/Header";
 import TableComponent from "./Components/Table";
 import { useFetchData } from "./hooks/useFileList";
-
-const LIST_FILES_TABLE = [
-  {
-    label: "File Name",
-    accesor: "file",
-  },
-  {
-    label: "Lines",
-    accesor: "lines",
-    onClick: () => {
-      console.warn("@dasdasdas");
-    },
-  },
-];
-
-const DETAIL_TABLE = [
-  {
-    label: "File Name",
-    accesor: "file",
-  },
-  {
-    label: "Text",
-    accesor: "text",
-  },
-  {
-    label: "Number",
-    accesor: "number",
-  },
-  {
-    label: "Hex",
-    accesor: "hex",
-  },
-];
+import { LIST_FILES_TABLE, DETAIL_TABLE } from "./utils/constants";
 
 function App() {
   const [fileListData, setFileListData] = useState();

@@ -42,8 +42,8 @@ function TableComponent({ columns = [], data = [], onClickRow }) {
 TableComponent.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
+      accesor: PropTypes.string.isRequired,
     })
   ),
   data: PropTypes.arrayOf(

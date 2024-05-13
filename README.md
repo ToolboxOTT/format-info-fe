@@ -27,6 +27,14 @@ Es proyecto visualiza una tabla para el consumo del endpoint ms-formatInfo
 
     El servidor estará disponible en http://localhost:5173.
 
+
+## Correr con contenedores
+
+    docker build -t toolbox:prod . 
+    docker run -it --rm -p 1337:80 toolbox:prod
+
+    El servidor estará disponible en http://localhost:5173.
+
 ## Contribución
     Si quieres contribuir al proyecto, sigue estos pasos:
 
