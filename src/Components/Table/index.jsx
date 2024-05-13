@@ -10,7 +10,7 @@ function TableComponent({ columns = [], data = [], onClickRow }) {
         <thead>
           <tr>
             {columns.map((column, index) => (
-              <th key={index}>{column.label}</th>
+              <th role="column" key={index}>{column.label}</th>
             ))}
           </tr>
         </thead>
