@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import Header from "./Components/Header";
 import TableComponent from "./Components/Table";
 import { useFetchData } from "./hooks/useFileList";
-import { LIST_FILES_TABLE, DETAIL_TABLE } from "./utils/constants";
+import { API_URL, LIST_FILES_TABLE, DETAIL_TABLE } from "./utils/constants";
 
 function App() {
   const [fileListData, setFileListData] = useState();
   const [fileListDetail, setFileListDetail] = useState();
   const { data: fileList } = useFetchData(
-    "http://localhost:3000/api/v1/files/data"
+    `${API_URL}/api/v1/files/data`
   );
 
   useEffect(() => {
